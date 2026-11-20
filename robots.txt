@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tklabo-caremane.github.io/sitemap.xml
