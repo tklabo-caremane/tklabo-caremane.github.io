@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>山手線から降りられない 第1編「いつもの朝」</title>
+<meta name="description" content="朝、五反田から田端へ帰るだけのはずだった。短編サウンドノベル『山手線から降りられない』第1編。">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; background:#0b0e11; }
+  body { font-family:"Hiragino Mincho ProN","Yu Mincho",serif; color:#e8e6df; overflow:hidden; }
+  #app { position:fixed; inset:0; max-width:960px; margin:0 auto; }
+  #scene { position:absolute; inset:0; }
+  #scene img { width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity 1.2s ease; }
+  #scene img.on { opacity:1; }
+  #shade { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(5,8,10,.25) 0%, rgba(5,8,10,0) 30%, rgba(5,8,10,0) 55%, rgba(5,8,10,.88) 100%); pointer-events:none; }
+  #clock { position:absolute; top:calc(12px + env(safe-area-inset-top)); left:14px; font-family:ui-monospace,Menlo,monospace; font-size:20px; letter-spacing:.12em; color:#f2efe6; background:rgba(8,12,14,.55); padding:5px 12px; border:1px solid rgba(242,239,230,.25); border-radius:4px; opacity:0; transition:opacity .8s ease; }
+  #clock.on { opacity:1; }
+  #clock small { display:block; font-size:9px; letter-spacing:.3em; color:#b9c4bb; text-align:center; }
+  #textbox { position:absolute; left:0; right:0; bottom:0; padding:18px 20px calc(20px + env(safe-area-inset-bottom)); cursor:pointer; }
+  #text { font-size:19px; line-height:1.9; min-height:3.8em; text-shadow:0 1px 6px rgba(0,0,0,.9); white-space:pre-wrap; }
+  #next { text-align:right; font-size:12px; color:#cfe0d2; opacity:.85; animation:bob 1.6s ease-in-out infinite; height:1em; }
+  @keyframes bob { 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(3px);} }
+  #choices { position:absolute; left:0; right:0; bottom:32%; display:none; flex-direction:column; gap:12px; align-items:center; padding:0 24px; }
+  #choices button { width:100%; max-width:480px; padding:14px 18px; font-family:inherit; font-size:16px; color:#f2efe6; background:rgba(10,16,14,.82); border:1px solid rgba(207,224,210,.5); border-radius:6px; cursor:pointer; }
+  #choices button:active { background:rgba(46,74,58,.9); }
+  .screen { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px; background:rgba(5,8,10,.45); }
+  .screen h1 { font-size:30px; font-weight:normal; letter-spacing:.18em; line-height:1.7; text-shadow:0 2px 10px rgba(0,0,0,.9); }
+  .screen h2 { font-size:15px; font-weight:normal; letter-spacing:.35em; color:#cfe0d2; margin-top:10px; }
+  .screen p { margin-top:26px; font-size:14px; line-height:2; color:#d8d5cc; text-shadow:0 1px 6px rgba(0,0,0,.9); }
+  .screen button { margin-top:34px; padding:13px 44px; font-family:inherit; font-size:16px; letter-spacing:.25em; color:#f2efe6; background:rgba(10,16,14,.8); border:1px solid rgba(207,224,210,.6); border-radius:6px; cursor:pointer; }
+  .screen button:active { background:rgba(46,74,58,.9); }
+  #endcard { display:none; }
+  #endcard .big { font-size:22px; letter-spacing:.3em; }
+  #endcard .stat { margin-top:18px; font-size:14px; color:#cfe0d2; letter-spacing:.15em; line-height:2.1; }
+  #title { z-index:5; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="scene"><img id="imgA" alt=""><img id="imgB" alt="" style="position:absolute;inset:0;"></div>
+  <div id="shade"></div>
+  <div id="clock"><small>現在時刻</small><span id="clockval">7:12</span></div>
+  <div id="choices"></div>
+  <div id="textbox" class="hidden">
+    <div id="text"></div>
+    <div id="next">▼</div>
+  </div>
+  <div id="title" class="screen">
+    <h1>山手線から<br>降りられない</h1>
+    <h2>第1編「いつもの朝」</h2>
+    <p>プレイ時間 約5分<br>タップで読み進めます</p>
+    <button id="startbtn">はじめる</button>
+  </div>
+  <div id="endcard" class="screen">
+    <div class="big">第1編　終</div>
+    <div class="stat">降りられなかった時間　12時間<br>周回　数えきれず</div>
+    <p>第2編「彼女編」へ続く</p>
+    <button id="againbtn">タイトルに戻る</button>
+  </div>
+</div>
+<script>
+const IMG = {
+  platform: "img/platform.webp",
+  sleep: "img/sleep.webp",
+  door: "img/door.webp",
+  passenger: "img/passenger.webp"
+};
+// node: {img, time, text} | {choice:[{label, to}]} | {jump:"label"} | {label:"x"} | {end:true}
+const SCRIPT = [
+  {img:"platform", time:"7:12", text:"夜勤明け。五反田駅。"},
+  {text:"眠い。とにかく眠い。"},
+  {text:"田端まで、40分もかからない。座れたら勝ちだと思った。"},
+  {img:"sleep", time:"7:14", text:"電車が来た。空いていた。"},
+  {text:"ドアの近くの席に座る。"},
+  {text:"目を閉じたのは、一駅分だけのつもりだった。"},
+  {time:"8:03", text:"目が覚めた。"},
+  {text:"窓の外は、知らない景色だった。"},
+  {text:"アナウンスが言う。「まもなく、西日暮里、西日暮里です」"},
+  {text:"田端は、ひとつ前だった。"},
+  {text:"……過ぎた。"},
+  {text:"まあ、いい。もう一周すれば着く。\n山手線は、円なのだから。"},
+  {text:"そう思ったのが、始まりだった。"},
+  {label:"loop2"},
+  {img:"door", time:"11:47", text:"二周目は、寝なかった。"},
+  {text:"ドアの前に立って、駅の名前をひとつずつ数えた。"},
+  {text:"大塚、巣鴨、駒込。次が、田端だ。"},
+  {text:"アナウンスが流れた。「まもなく、田端、田端です」"},
+  {text:"ドアの前に立っていた。間違いなく、立っていた。"},
+  {text:"なのに次の瞬間、電車は田端を出ていた。"},
+  {text:"窓の外を、田端のホームが後ろへ流れていった。"},
+  {text:"あの数秒間が、ない。"},
+  {text:"時計を見た。11時47分。"},
+  {text:"おかしい。さっきまで、9時だったはずだ。"},
+  {img:"sleep", time:"12:20", text:"トイレに行きたくなった。"},
+  {text:"次の駅で降りた。確かに、降りた。"},
+  {text:"用を足して、ホームに戻って、来た電車に乗った。"},
+  {text:"……乗った、はずだ。"},
+  {text:"でも今、自分がいつからこの席に座っているのか、思い出せない。"},
+  {time:"13:05", text:"お腹が空いた。"},
+  {text:"上野で降りて、駅そばを食べた。温かかった。"},
+  {text:"食べ終わって店を出ると、目の前を山手線が通り過ぎた。"},
+  {text:"あれに乗らなきゃ、と思ったところまでは覚えている。"},
+  {label:"loop3"},
+  {img:"passenger", time:"15:26", text:"三周目だと思う。もう数えるのをやめた。"},
+  {text:"向かいの席に、男が座っている。"},
+  {text:"フードを被って、うつむいて、微動だにしない。"},
+  {text:"あの男は、朝からずっとあそこにいる気がする。"},
+  {text:"気のせいだ、と思いたい。"},
+  {choice:[
+    {label:"男に声をかける", to:"talk"},
+    {label:"声はかけない", to:"notalk"}
+  ]},
+  {label:"talk"},
+  {text:"「あの、すみません」"},
+  {text:"男は、顔を上げなかった。"},
+  {text:"ただ、小さな声で言った。"},
+  {text:"「……まだ、着きませんよ」"},
+  {text:"それきり、男はまた微動だにしなくなった。"},
+  {jump:"ad"},
+  {label:"notalk"},
+  {text:"やめた。声をかけるのは、やめた。"},
+  {text:"なぜか、聞いてはいけない気がした。"},
+  {label:"ad"},
+  {text:"男の上の広告を見た。海の写真の広告。"},
+  {text:"朝は、あの広告に文字があった気がする。"},
+  {text:"今は、海しかない。"},
+  {text:"時計は、15時26分を指している。"},
+  {text:"今日は、やけに長い。"},
+  {choice:[
+    {label:"ドアの前に立ち続ける", to:"cdoor"},
+    {label:"車掌に聞きに行く", to:"cconductor"},
+    {label:"あえて、もう一度寝てみる", to:"csleep"}
+  ]},
+  {label:"cdoor"},
+  {img:"door", time:"16:10", text:"ドアの前に立ち続けた。"},
+  {text:"田端が近づく。ドアに手をかける。今度こそ。"},
+  {text:"「まもなく、田端、田端です」"},
+  {text:"ドアが開いた。目の前に、ホームがある。"},
+  {text:"一歩が、出ない。"},
+  {text:"足が床に張り付いたみたいに、動かない。"},
+  {text:"ドアが閉まった。"},
+  {text:"……いや、違う。"},
+  {text:"踏み出した「はず」の時間だけが、ない。"},
+  {jump:"finale"},
+  {label:"cconductor"},
+  {img:"sleep", time:"16:10", text:"車掌室の窓を叩いた。"},
+  {text:"車掌が、顔を出す。"},
+  {text:"「あの、田端で降りたいんですけど」"},
+  {text:"車掌は少し困った顔をして、言った。"},
+  {text:"「お客様、さっきも同じことを仰っていましたよ」"},
+  {text:"さっき、とは、いつだ。"},
+  {text:"訊き返す前に、車掌は窓を閉めた。"},
+  {jump:"finale"},
+  {label:"csleep"},
+  {img:"sleep", time:"16:10", text:"もう一度、目を閉じた。"},
+  {text:"夢の中で、田端のホームに立っていた。"},
+  {text:"改札を出て、坂を上って、家のドアを開けた。"},
+  {text:"目が覚めた。"},
+  {text:"向かいの席で、フードの男がまだうつむいていた。"},
+  {text:"時計だけが、進んでいた。"},
+  {label:"finale"},
+  {img:"passenger", time:"18:58", text:"日が暮れた。"},
+  {text:"窓の外は暗くて、車内の明かりが窓に映る。"},
+  {text:"広告の海は、朝より暗い色になっていた。"},
+  {text:"向かいの男は、まだいる。"},
+  {text:"もうすぐ19時になる。12時間だ。"},
+  {text:"朝、五反田でこの電車に乗ってから、12時間。"},
+  {text:"アナウンスが流れた。「まもなく、田端、田端です」"},
+  {img:"door", text:"立ち上がる。ドアの前に立つ。"},
+  {text:"ホームが見える。"},
+  {text:"ドアが――"},
+  {img:"platform", time:"7:12", text:"目が覚めた。"},
+  {text:"五反田駅のホームだった。"},
+  {text:"朝の光。ベンチに座っていた。"},
+  {text:"電車が来る。ドアが開く。"},
+  {text:"――もう一周が、始まる。"},
+  {end:true}
+];
+const labels = {};
+SCRIPT.forEach((n,i)=>{ if(n.label) labels[n.label]=i; });
+let pc = 0, curImg = "A";
+const imgEls = {A: document.getElementById("imgA"), B: document.getElementById("imgB")};
+const textEl = document.getElementById("text");
+const clockEl = document.getElementById("clock");
+const clockVal = document.getElementById("clockval");
+const choicesEl = document.getElementById("choices");
+const textbox = document.getElementById("textbox");
+function setImg(name){
+  const next = curImg === "A" ? "B" : "A";
+  const el = imgEls[next];
+  el.src = IMG[name];
+  el.classList.add("on");
+  imgEls[curImg].classList.remove("on");
+  curImg = next;
+}
+function step(){
+  while(pc < SCRIPT.length){
+    const n = SCRIPT[pc];
+    if(n.label){ pc++; continue; }
+    if(n.jump){ pc = labels[n.jump]; continue; }
+    if(n.end){ showEnd(); return; }
+    if(n.choice){ showChoices(n.choice); pc++; return; }
+    if(n.img) setImg(n.img);
+    if(n.time) clockVal.textContent = n.time;
+    textEl.textContent = n.text || "";
+    pc++;
+    return;
+  }
+  showEnd();
+}
+function showChoices(list){
+  textbox.classList.add("hidden");
+  choicesEl.innerHTML = "";
+  list.forEach(c=>{
+    const b = document.createElement("button");
+    b.textContent = c.label;
+    b.onclick = (e)=>{ e.stopPropagation(); choicesEl.style.display="none"; textbox.classList.remove("hidden"); pc = labels[c.to]; step(); };
+    choicesEl.appendChild(b);
+  });
+  choicesEl.style.display = "flex";
+}
+function showEnd(){
+  textbox.classList.add("hidden");
+  clockEl.classList.remove("on");
+  document.getElementById("endcard").style.display = "flex";
+}
+document.getElementById("startbtn").onclick = ()=>{
+  document.getElementById("title").style.display = "none";
+  textbox.classList.remove("hidden");
+  clockEl.classList.add("on");
+  pc = 0; step();
+};
+document.getElementById("againbtn").onclick = ()=> location.reload();
+textbox.addEventListener("click", ()=>{ if(choicesEl.style.display !== "flex") step(); });
+imgEls.A.src = IMG.platform; imgEls.A.classList.add("on");
+</script>
+</body>
+</html>
