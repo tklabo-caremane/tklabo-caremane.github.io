@@ -27,6 +27,11 @@ ul.links { line-height:2.1; }
 ul.links a { color:#0b7a68; font-weight:bold; }
 .center { text-align:center; }
 .small { color:#7a7565; font-size:13px; margin-top:40px; text-align:center; }
+
+.card { position:relative; }
+.stamp { position:absolute; top:8px; right:8px; background:#e07b39; color:#fff; font-weight:bold; border-radius:50%; width:32px; height:32px; line-height:32px; text-align:center; font-size:15px; transform:rotate(12deg); box-shadow:0 1px 4px rgba(0,0,0,.25); }
+#colInfo { text-align:center; font-weight:bold; color:#e07b39; }
+#dCol { text-align:center; font-weight:bold; color:#e07b39; }
 </style>
 </head>
 <body>
@@ -34,48 +39,61 @@ ul.links a { color:#0b7a68; font-weight:bold; }
 <h1>職業ギャラリー</h1>
 <p>ブラウザゲーム『6駅先の職業』に登場する40の職業を紹介します。各ページでは、その職業の人数（約○人に1人）と、現実のつながりのある職業をたどれます。</p>
 <p class="center"><a class="btn" href="https://tklabo-caremane.github.io/occupation-game/">『6駅先の職業』で遊ぶ</a></p>
+<p id="colInfo"></p>
 <div class="grid">
-<a class="card" href="ryoushi.html"><img src="img/ryoushi.webp" alt="漁師のイラスト" loading="lazy"><div class="nm">漁師</div><div class="pp">約1,000人に1人</div></a>
-<a class="card" href="ryouri.html"><img src="img/ryouri.webp" alt="料理人のイラスト" loading="lazy"><div class="nm">料理人</div><div class="pp">約60人に1人</div></a>
-<a class="card" href="caremane.html"><img src="img/caremane.webp" alt="ケアマネジャーのイラスト" loading="lazy"><div class="nm">ケアマネジャー</div><div class="pp">約550人に1人</div></a>
-<a class="card" href="hoiku.html"><img src="img/hoiku.webp" alt="保育士のイラスト" loading="lazy"><div class="nm">保育士</div><div class="pp">約180人に1人</div></a>
-<a class="card" href="daiku.html"><img src="img/daiku.webp" alt="大工のイラスト" loading="lazy"><div class="nm">大工</div><div class="pp">約420人に1人</div></a>
-<a class="card" href="dagashi.html"><img src="img/dagashi.webp" alt="駄菓子屋のイラスト" loading="lazy"><div class="nm">駄菓子屋</div><div class="pp">約2万人に1軒</div></a>
-<a class="card" href="nouka.html"><img src="img/nouka.webp" alt="農家のイラスト" loading="lazy"><div class="nm">農家</div><div class="pp">約100人に1人</div></a>
-<a class="card" href="panya.html"><img src="img/panya.webp" alt="パン屋のイラスト" loading="lazy"><div class="nm">パン屋</div><div class="pp">約1万2千人に1軒</div></a>
-<a class="card" href="yaoya.html"><img src="img/yaoya.webp" alt="八百屋のイラスト" loading="lazy"><div class="nm">八百屋</div><div class="pp">約6,000人に1軒</div></a>
-<a class="card" href="truck.html"><img src="img/truck.webp" alt="トラック運転手のイラスト" loading="lazy"><div class="nm">トラック運転手</div><div class="pp">約150人に1人</div></a>
-<a class="card" href="seibishi.html"><img src="img/seibishi.webp" alt="自動車整備士のイラスト" loading="lazy"><div class="nm">自動車整備士</div><div class="pp">約380人に1人</div></a>
-<a class="card" href="kangoshi.html"><img src="img/kangoshi.webp" alt="看護師のイラスト" loading="lazy"><div class="nm">看護師</div><div class="pp">約100人に1人</div></a>
-<a class="card" href="isha.html"><img src="img/isha.webp" alt="医者のイラスト" loading="lazy"><div class="nm">医者</div><div class="pp">約360人に1人</div></a>
-<a class="card" href="yakuzai.html"><img src="img/yakuzai.webp" alt="薬剤師のイラスト" loading="lazy"><div class="nm">薬剤師</div><div class="pp">約390人に1人</div></a>
-<a class="card" href="sensei.html"><img src="img/sensei.webp" alt="学校の先生のイラスト" loading="lazy"><div class="nm">学校の先生</div><div class="pp">約300人に1人</div></a>
-<a class="card" href="cameraman.html"><img src="img/cameraman.webp" alt="カメラマンのイラスト" loading="lazy"><div class="nm">カメラマン</div><div class="pp">約2,500人に1人</div></a>
-<a class="card" href="shiyakusho.html"><img src="img/shiyakusho.webp" alt="市役所職員のイラスト" loading="lazy"><div class="nm">市役所職員</div><div class="pp">約80人に1人</div></a>
-<a class="card" href="keisatsu.html"><img src="img/keisatsu.webp" alt="警察官のイラスト" loading="lazy"><div class="nm">警察官</div><div class="pp">約480人に1人</div></a>
-<a class="card" href="shoubou.html"><img src="img/shoubou.webp" alt="消防士のイラスト" loading="lazy"><div class="nm">消防士</div><div class="pp">約740人に1人</div></a>
-<a class="card" href="yuubin.html"><img src="img/yuubin.webp" alt="郵便配達員のイラスト" loading="lazy"><div class="nm">郵便配達員</div><div class="pp">約620人に1人</div></a>
-<a class="card" href="fudousan.html"><img src="img/fudousan.webp" alt="不動産屋のイラスト" loading="lazy"><div class="nm">不動産屋</div><div class="pp">約100人に1人</div></a>
-<a class="card" href="helper.html"><img src="img/helper.webp" alt="ヘルパーのイラスト" loading="lazy"><div class="nm">ヘルパー</div><div class="pp">約60人に1人</div></a>
-<a class="card" href="haisha.html"><img src="img/haisha.webp" alt="歯医者のイラスト" loading="lazy"><div class="nm">歯医者</div><div class="pp">約1,200人に1人</div></a>
-<a class="card" href="juuishi.html"><img src="img/juuishi.webp" alt="獣医のイラスト" loading="lazy"><div class="nm">獣医</div><div class="pp">約3,100人に1人</div></a>
-<a class="card" href="shisho.html"><img src="img/shisho.webp" alt="司書のイラスト" loading="lazy"><div class="nm">司書</div><div class="pp">約5,600人に1人</div></a>
-<a class="card" href="denki.html"><img src="img/denki.webp" alt="電気工事士のイラスト" loading="lazy"><div class="nm">電気工事士</div><div class="pp">約330人に1人</div></a>
-<a class="card" href="bus.html"><img src="img/bus.webp" alt="バス運転手のイラスト" loading="lazy"><div class="nm">バス運転手</div><div class="pp">約1,000人に1人</div></a>
-<a class="card" href="taxi.html"><img src="img/taxi.webp" alt="タクシー運転手のイラスト" loading="lazy"><div class="nm">タクシー運転手</div><div class="pp">約560人に1人</div></a>
-<a class="card" href="kenchiku.html"><img src="img/kenchiku.webp" alt="建築士のイラスト" loading="lazy"><div class="nm">建築士</div><div class="pp">約330人に1人</div></a>
-<a class="card" href="biyoushi.html"><img src="img/biyoushi.webp" alt="美容師のイラスト" loading="lazy"><div class="nm">美容師</div><div class="pp">約210人に1人</div></a>
-<a class="card" href="ekiin.html"><img src="img/ekiin.webp" alt="駅員のイラスト" loading="lazy"><div class="nm">駅員</div><div class="pp">約1,200人に1人</div></a>
-<a class="card" href="hanaya.html"><img src="img/hanaya.webp" alt="花屋のイラスト" loading="lazy"><div class="nm">花屋</div><div class="pp">約2,500人に1人</div></a>
-<a class="card" href="konbini.html"><img src="img/konbini.webp" alt="コンビニ店員のイラスト" loading="lazy"><div class="nm">コンビニ店員</div><div class="pp">約120人に1人</div></a>
-<a class="card" href="rigaku.html"><img src="img/rigaku.webp" alt="理学療法士のイラスト" loading="lazy"><div class="nm">理学療法士</div><div class="pp">約600人に1人</div></a>
-<a class="card" href="eiyoushi.html"><img src="img/eiyoushi.webp" alt="栄養士のイラスト" loading="lazy"><div class="nm">栄養士</div><div class="pp">約500人に1人</div></a>
-<a class="card" href="sakanaya.html"><img src="img/sakanaya.webp" alt="魚屋のイラスト" loading="lazy"><div class="nm">魚屋</div><div class="pp">約1万2千人に1軒</div></a>
-<a class="card" href="patissier.html"><img src="img/patissier.webp" alt="パティシエのイラスト" loading="lazy"><div class="nm">パティシエ</div><div class="pp">約4,000人に1人</div></a>
-<a class="card" href="shikaeisei.html"><img src="img/shikaeisei.webp" alt="歯科衛生士のイラスト" loading="lazy"><div class="nm">歯科衛生士</div><div class="pp">約800人に1人</div></a>
-<a class="card" href="fukushishi.html"><img src="img/fukushishi.webp" alt="社会福祉士のイラスト" loading="lazy"><div class="nm">社会福祉士</div><div class="pp">約500人に1人</div></a>
-<a class="card" href="haikankou.html"><img src="img/haikankou.webp" alt="配管工のイラスト" loading="lazy"><div class="nm">配管工</div><div class="pp">約600人に1人</div></a>
+<a class="card" data-k="ryoushi" href="ryoushi.html"><img src="img/ryoushi.webp" alt="漁師のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">漁師</div><div class="pp">約1,000人に1人</div></a>
+<a class="card" data-k="ryouri" href="ryouri.html"><img src="img/ryouri.webp" alt="料理人のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">料理人</div><div class="pp">約60人に1人</div></a>
+<a class="card" data-k="caremane" href="caremane.html"><img src="img/caremane.webp" alt="ケアマネジャーのイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">ケアマネジャー</div><div class="pp">約550人に1人</div></a>
+<a class="card" data-k="hoiku" href="hoiku.html"><img src="img/hoiku.webp" alt="保育士のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">保育士</div><div class="pp">約180人に1人</div></a>
+<a class="card" data-k="daiku" href="daiku.html"><img src="img/daiku.webp" alt="大工のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">大工</div><div class="pp">約420人に1人</div></a>
+<a class="card" data-k="dagashi" href="dagashi.html"><img src="img/dagashi.webp" alt="駄菓子屋のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">駄菓子屋</div><div class="pp">約2万人に1軒</div></a>
+<a class="card" data-k="nouka" href="nouka.html"><img src="img/nouka.webp" alt="農家のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">農家</div><div class="pp">約100人に1人</div></a>
+<a class="card" data-k="panya" href="panya.html"><img src="img/panya.webp" alt="パン屋のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">パン屋</div><div class="pp">約1万2千人に1軒</div></a>
+<a class="card" data-k="yaoya" href="yaoya.html"><img src="img/yaoya.webp" alt="八百屋のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">八百屋</div><div class="pp">約6,000人に1軒</div></a>
+<a class="card" data-k="truck" href="truck.html"><img src="img/truck.webp" alt="トラック運転手のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">トラック運転手</div><div class="pp">約150人に1人</div></a>
+<a class="card" data-k="seibishi" href="seibishi.html"><img src="img/seibishi.webp" alt="自動車整備士のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">自動車整備士</div><div class="pp">約380人に1人</div></a>
+<a class="card" data-k="kangoshi" href="kangoshi.html"><img src="img/kangoshi.webp" alt="看護師のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">看護師</div><div class="pp">約100人に1人</div></a>
+<a class="card" data-k="isha" href="isha.html"><img src="img/isha.webp" alt="医者のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">医者</div><div class="pp">約360人に1人</div></a>
+<a class="card" data-k="yakuzai" href="yakuzai.html"><img src="img/yakuzai.webp" alt="薬剤師のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">薬剤師</div><div class="pp">約390人に1人</div></a>
+<a class="card" data-k="sensei" href="sensei.html"><img src="img/sensei.webp" alt="学校の先生のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">学校の先生</div><div class="pp">約300人に1人</div></a>
+<a class="card" data-k="cameraman" href="cameraman.html"><img src="img/cameraman.webp" alt="カメラマンのイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">カメラマン</div><div class="pp">約2,500人に1人</div></a>
+<a class="card" data-k="shiyakusho" href="shiyakusho.html"><img src="img/shiyakusho.webp" alt="市役所職員のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">市役所職員</div><div class="pp">約80人に1人</div></a>
+<a class="card" data-k="keisatsu" href="keisatsu.html"><img src="img/keisatsu.webp" alt="警察官のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">警察官</div><div class="pp">約480人に1人</div></a>
+<a class="card" data-k="shoubou" href="shoubou.html"><img src="img/shoubou.webp" alt="消防士のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">消防士</div><div class="pp">約740人に1人</div></a>
+<a class="card" data-k="yuubin" href="yuubin.html"><img src="img/yuubin.webp" alt="郵便配達員のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">郵便配達員</div><div class="pp">約620人に1人</div></a>
+<a class="card" data-k="fudousan" href="fudousan.html"><img src="img/fudousan.webp" alt="不動産屋のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">不動産屋</div><div class="pp">約100人に1人</div></a>
+<a class="card" data-k="helper" href="helper.html"><img src="img/helper.webp" alt="ヘルパーのイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">ヘルパー</div><div class="pp">約60人に1人</div></a>
+<a class="card" data-k="haisha" href="haisha.html"><img src="img/haisha.webp" alt="歯医者のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">歯医者</div><div class="pp">約1,200人に1人</div></a>
+<a class="card" data-k="juuishi" href="juuishi.html"><img src="img/juuishi.webp" alt="獣医のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">獣医</div><div class="pp">約3,100人に1人</div></a>
+<a class="card" data-k="shisho" href="shisho.html"><img src="img/shisho.webp" alt="司書のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">司書</div><div class="pp">約5,600人に1人</div></a>
+<a class="card" data-k="denki" href="denki.html"><img src="img/denki.webp" alt="電気工事士のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">電気工事士</div><div class="pp">約330人に1人</div></a>
+<a class="card" data-k="bus" href="bus.html"><img src="img/bus.webp" alt="バス運転手のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">バス運転手</div><div class="pp">約1,000人に1人</div></a>
+<a class="card" data-k="taxi" href="taxi.html"><img src="img/taxi.webp" alt="タクシー運転手のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">タクシー運転手</div><div class="pp">約560人に1人</div></a>
+<a class="card" data-k="kenchiku" href="kenchiku.html"><img src="img/kenchiku.webp" alt="建築士のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">建築士</div><div class="pp">約330人に1人</div></a>
+<a class="card" data-k="biyoushi" href="biyoushi.html"><img src="img/biyoushi.webp" alt="美容師のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">美容師</div><div class="pp">約210人に1人</div></a>
+<a class="card" data-k="ekiin" href="ekiin.html"><img src="img/ekiin.webp" alt="駅員のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">駅員</div><div class="pp">約1,200人に1人</div></a>
+<a class="card" data-k="hanaya" href="hanaya.html"><img src="img/hanaya.webp" alt="花屋のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">花屋</div><div class="pp">約2,500人に1人</div></a>
+<a class="card" data-k="konbini" href="konbini.html"><img src="img/konbini.webp" alt="コンビニ店員のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">コンビニ店員</div><div class="pp">約120人に1人</div></a>
+<a class="card" data-k="rigaku" href="rigaku.html"><img src="img/rigaku.webp" alt="理学療法士のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">理学療法士</div><div class="pp">約600人に1人</div></a>
+<a class="card" data-k="eiyoushi" href="eiyoushi.html"><img src="img/eiyoushi.webp" alt="栄養士のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">栄養士</div><div class="pp">約500人に1人</div></a>
+<a class="card" data-k="sakanaya" href="sakanaya.html"><img src="img/sakanaya.webp" alt="魚屋のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">魚屋</div><div class="pp">約1万2千人に1軒</div></a>
+<a class="card" data-k="patissier" href="patissier.html"><img src="img/patissier.webp" alt="パティシエのイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">パティシエ</div><div class="pp">約4,000人に1人</div></a>
+<a class="card" data-k="shikaeisei" href="shikaeisei.html"><img src="img/shikaeisei.webp" alt="歯科衛生士のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">歯科衛生士</div><div class="pp">約800人に1人</div></a>
+<a class="card" data-k="fukushishi" href="fukushishi.html"><img src="img/fukushishi.webp" alt="社会福祉士のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">社会福祉士</div><div class="pp">約500人に1人</div></a>
+<a class="card" data-k="haikankou" href="haikankou.html"><img src="img/haikankou.webp" alt="配管工のイラスト" loading="lazy"><span class="stamp" style="display:none;">済</span><div class="nm">配管工</div><div class="pp">約600人に1人</div></a>
 </div>
+<script>
+try { var c = JSON.parse(localStorage.getItem('rokuCol') || '{}'); var v = c.v || {}; var n = 0;
+var cards = document.querySelectorAll('.card[data-k]');
+cards.forEach(function(el){ var k = el.getAttribute('data-k');
+if(v[k]){ n++; var st = el.querySelector('.stamp'); if(st) st.style.display = 'block'; }
+else { el.style.opacity = '0.55'; var im = el.querySelector('img'); if(im) im.style.filter = 'grayscale(75%)'; }});
+var info = document.getElementById('colInfo');
+if(info && cards.length){ var t = 'あなたの図鑑：' + n + ' / ' + cards.length + ' 職';
+if(c.done) t += '（' + c.done + ' に全職コンプリート！）';
+info.textContent = t; } } catch(e){}
+</script>
+
 <p>職業の人数は公的統計などの概数です。</p>
 <p class="small">運営：TKラボ　／　<a href="https://tklabo-caremane.github.io/">トップページ（運営者情報・お問い合わせ）</a>　／　<a href="https://tklabo-caremane.github.io/privacy-policy/">プライバシーポリシー</a></p>
 </div>

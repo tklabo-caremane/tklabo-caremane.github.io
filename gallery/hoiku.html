@@ -27,6 +27,11 @@ ul.links { line-height:2.1; }
 ul.links a { color:#0b7a68; font-weight:bold; }
 .center { text-align:center; }
 .small { color:#7a7565; font-size:13px; margin-top:40px; text-align:center; }
+
+.card { position:relative; }
+.stamp { position:absolute; top:8px; right:8px; background:#e07b39; color:#fff; font-weight:bold; border-radius:50%; width:32px; height:32px; line-height:32px; text-align:center; font-size:15px; transform:rotate(12deg); box-shadow:0 1px 4px rgba(0,0,0,.25); }
+#colInfo { text-align:center; font-weight:bold; color:#e07b39; }
+#dCol { text-align:center; font-weight:bold; color:#e07b39; }
 </style>
 </head>
 <body>
@@ -34,6 +39,8 @@ ul.links a { color:#0b7a68; font-weight:bold; }
 <h1>保育士</h1>
 <div class="hero"><img src="img/hoiku.webp" alt="保育士のイラスト"></div>
 <p class="bignum">全国に約68万人 ― 約180人に1人</p>
+<p id="dCol" style="display:none;">✔ この職業は通ったことがあります</p>
+<script>try{var c=JSON.parse(localStorage.getItem('rokuCol')||'{}');if(c.v&&c.v['hoiku'])document.getElementById('dCol').style.display='block';}catch(e){}</script>
 <p>保育園で小さな子どもたちの生活と遊びを見守る仕事。食事も昼寝も外遊びも、1日の流れ全部が仕事場です。</p>
 <h2>つながりのある職業</h2>
 <ul class="links">
